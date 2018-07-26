@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::resource('/users', 'UsersController');
+Route::resource('/permissions', 'PermissionsController')->except('destroy');
+Route::resource('/roles', 'RolesController');

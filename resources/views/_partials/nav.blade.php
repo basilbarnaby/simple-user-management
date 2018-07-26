@@ -8,19 +8,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('users.index') }}">
                     <span data-feather="user"></span>
                     Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('roles.index') }}">
                     <span data-feather="users"></span>
                     Roles
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('permissions.index') }}">
                     <span data-feather="user-x"></span>
                     Permissions
                 </a>
