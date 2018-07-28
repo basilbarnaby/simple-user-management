@@ -14,5 +14,6 @@
             </div>
         </div>
         @include('_partials.scripts')
+        @yield('vue')
     </body>
 </html>
