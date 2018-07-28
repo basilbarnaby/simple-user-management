@@ -19,7 +19,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4 offset-md-8">
             @include('_partials.flash')
             @include('_partials.errors')
         </div>

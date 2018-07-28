@@ -9,6 +9,12 @@
 @endsection
 
 @section('content')
+    <div class="row">
+        <div class="col-md-4 offset-md-6">
+            @include('_partials.flash')
+            @include('_partials.errors')
+        </div>
+    </div>
     <div class="row" id="form">
         <div class="col-md-8 offset-md-2">
             <div class="card">

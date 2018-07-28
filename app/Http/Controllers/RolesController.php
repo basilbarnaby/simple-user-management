@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
+use App\Permission;
 
 class RolesController extends Controller
 {
@@ -13,7 +15,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('roles.index');
+        $roles = Role::all();
+        return view('roles.index', compact('roles'));
     }
 
     /**
@@ -23,7 +26,8 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Permission::all();
+        return view('roles.create', compact('permissions'));
     }
 
     /**
@@ -34,7 +38,24 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'display_name' => 'required|max:191',
+            'name' => 'required|max:100|alpha_dash|unique:roles,name',
+            'description' =>'required|max:191'
+        ]);
+
+        $role = Role::create([
+            'display_name' => request('display_name'),
+            'name' => request('name'),
+            'description' => request('description')
+        ]);
+
+        if ($request->permissions) {
+            $role->SyncPermissions(explode(',', request('permissions')));
+        }
+
+        session()->flash('success', 'The ' . $role->display_name . ' role was successfully created!');
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -43,9 +64,9 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        return view('roles.show', compact('role'));
     }
 
     /**
@@ -54,9 +75,10 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        $permissions = Permission::all();
+        return view('roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -66,9 +88,24 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $this->validate(request(), [
+            'display_name' => 'required|max:191',
+            'description' =>'required|max:191'
+        ]);
+
+        Role::where('id', $role->id)->update([
+            'display_name' => request('display_name'),
+            'description' => request('description')
+        ]);
+
+        if ($request->permissions) {
+            $role->SyncPermissions(explode(',', request('permissions')));
+        }
+
+        session()->flash('success', 'The ' . $role->display_name . ' role was successfully updated!');
+        return redirect()->route('roles.show', $role->id);
     }
 
     /**
@@ -77,7 +114,7 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
         //
     }
