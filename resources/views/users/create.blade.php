@@ -66,7 +66,7 @@
                                 <a href="{{ route('roles.index') }}" class="btn btn-outline-secondary btn-block">Cancel</a>
                             </div>
                             <div class="col-md-3">
-                                <input type="submit" value="Save Role" class="btn btn-outline-success btn-block">
+                                <input type="submit" value="Save User" class="btn btn-outline-success btn-block">
                             </div>
                         </div>
                     </div>
