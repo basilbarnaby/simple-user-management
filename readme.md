@@ -5,6 +5,29 @@
 
 Laravel Simple User Mangement is a small reusable web application that manages Users, Roles and Permissions. This is a starter template for any laravel based web applicatoin that needs authentication with role and permission control.
 
+## Usage
+
+### Prerequisites
+1. Composer - PHP Package Manager
+2. NPM - Node Package Manager
+
+### Installation
+1. Clone project.
+    > git clone https://github.com/basilbarnaby/simple-user-management.git
+2. Install using **composer**.
+    > composer install <br>
+    composer update
+
+3. Run database migrations
+    > php artisan migrate
+
+### Installation
+1. Login with using default super admin username and password
+    > username: suadmin@example.com <br>
+    password: password
+
+2. Use superadmin access to create users, roles, and permissions for testing.
+
 ## Technologies
 
 ### Laravel
