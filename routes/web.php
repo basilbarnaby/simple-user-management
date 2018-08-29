@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::resource('/users', 'UsersController');
-Route::resource('/permissions', 'PermissionsController')->except('destroy');
-Route::resource('/roles', 'RolesController');
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::redirect('/', '/home');
+Route::resource('/users', 'UsersController')->middleware(['role:superadmin|administrator']);;
+Route::resource('/permissions', 'PermissionsController')->except('destroy')->middleware(['role:superadmin']);;
+Route::resource('/roles', 'RolesController')->middleware(['role:superadmin']);

@@ -6,18 +6,29 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use Hash;
+use Auth;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        if(Auth::user()->hasRole(['superadmin'])){
+            $users = User::all();
+        } else {
+            $users = User::getUsers()->get();
+        }
+        
         return view('users.index', compact('users'));
     }
 
     public function create()
     {
-        $roles = Role::all();
+        if(Auth::user()->hasRole(['superadmin'])){
+            $roles = Role::all();
+        } else {
+            $roles = Role::getRoles()->get();
+        }
+
         return view('users.create', compact('roles'));
     }
 
@@ -52,7 +63,12 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        $roles = Role::all();
+        if(Auth::user()->hasRole(['superadmin'])){
+            $roles = Role::all();
+        } else {
+            $roles = Role::getRoles()->get();
+        }
+
         return view('users.edit', compact('user', 'roles'));
     }
 
@@ -80,7 +96,9 @@ class UsersController extends Controller
         }
 
         if($request->roles){
-            $user->syncRoles(explode(',', $request->roles));
+            $user->syncRoles(explode(',', $request->roles), false);
+        }else{
+            $user->detachRoles($user->roles);
         }
 
         session()->flash('success', 'User has been successfully update!');

@@ -9,6 +9,12 @@
 @endsection
 
 @section('content')
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+            @include('_partials.flash')
+            @include('_partials.errors')
+        </div> 
+    </div>
     <div class="row mb-5">
         <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
                 <div class="card">
@@ -60,7 +66,7 @@
                 </div>
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <p class="text-muted text-center"><strong>Test Admin Credentials</strong><br>Username: admin@example <br> Password: password</p>
+                    <p class="text-muted text-center"><strong>Test Super Admin Credentials</strong><br>Username: suadmin@example <br> Password: password</p>
                 </div>
             </div>
         </div>

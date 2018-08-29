@@ -28,4 +28,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeGetUsers($query)
+    {
+        return $query->whereHas('roles', function($q){
+            return $q->where('name', '!=', 'superadmin');
+        });
+    }
 }
