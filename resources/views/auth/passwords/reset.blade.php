@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="row mb-5">
-        <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3">
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('password.request') }}" method="POST">
