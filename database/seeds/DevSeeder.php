@@ -12,5 +12,6 @@ class DevSeeder extends Seeder
     public function run()
     {
         $this->call(ResetLaratrustTablesSeeder::class);
+        $this->call(TestAdminSeeder::class);
     }
 }
